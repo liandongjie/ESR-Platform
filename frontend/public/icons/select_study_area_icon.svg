@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" role="img" aria-label="选择研究区域图标">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34C3FF"/>
+      <stop offset="100%" stop-color="#2B6CFF"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#38D6C4"/>
+      <stop offset="100%" stop-color="#14B8A6"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#D8E3F2" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" rx="0" fill="#FFFFFF"/>
+  <g filter="url(#shadow)">
+    <rect x="22" y="22" width="156" height="156" rx="34" fill="#FFFFFF" stroke="#E5EDF7" stroke-width="3"/>
+  </g>
+  <g stroke="#1E3357" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M54 66h18"/>
+    <path d="M54 54v18"/>
+    <path d="M146 66h-18"/>
+    <path d="M146 54v18"/>
+    <path d="M54 134h18"/>
+    <path d="M54 146v-18"/>
+    <path d="M146 134h-18"/>
+    <path d="M146 146v-18"/>
+    <path d="M72 118l18-18 16 10 21-26" stroke="url(#g2)"/>
+  </g>
+  <path d="M100 54c-13.255 0-24 10.745-24 24 0 19.5 24 45 24 45s24-25.5 24-45c0-13.255-10.745-24-24-24Z" fill="url(#g1)" stroke="#1E3357" stroke-width="5" stroke-linejoin="round"/>
+  <circle cx="100" cy="78" r="8.5" fill="#FFFFFF" stroke="#1E3357" stroke-width="4"/>
+</svg>

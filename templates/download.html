@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>数据下载 - 环境社会风险平台</title>
+        <link rel="icon" href="../static/img/favico.ico" type="image/x-icon" />
+
+        <style>
+            :root {
+                --bg: #f8f4ef;
+                --panel: rgba(255, 255, 255, 0.92);
+                --border: #eadfd4;
+                --blue: #64b5f6;
+                --cyan: #4dd0e1;
+                --pink: #f8bbd0;
+                --green: #a5d6a7;
+                --text: #2f3a45;
+                --muted: #7b8794;
+                --shadow: 0 14px 36px rgba(120, 140, 160, 0.18);
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                min-height: 100vh;
+                font-family: Helvetica, 'Microsoft YaHei', Arial, sans-serif;
+                color: var(--text);
+                background: radial-gradient(circle at 10% 10%, rgba(248, 187, 208, 0.28), transparent 28%), radial-gradient(circle at 90% 20%, rgba(100, 181, 246, 0.22), transparent 26%), radial-gradient(circle at 80% 90%, rgba(165, 214, 167, 0.24), transparent 30%), var(--bg);
+            }
+
+            a {
+                color: #1687c9;
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            .page {
+                max-width: 1080px;
+                margin: 0 auto;
+                padding: 28px 28px 36px;
+            }
+
+            .top-card {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                padding: 22px 26px;
+                background: linear-gradient(120deg, #fff7f2 0%, #f7fbff 55%, #f4fff9 100%);
+                border: 1px solid var(--border);
+                border-radius: 18px;
+                box-shadow: var(--shadow);
+            }
+
+            .title-block h1 {
+                margin: 0;
+                font-size: 26px;
+                letter-spacing: 0.5px;
+            }
+
+            .title-block p {
+                margin: 8px 0 0;
+                color: var(--muted);
+                font-size: 14px;
+            }
+
+            .download-all {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 136px;
+                height: 42px;
+                padding: 0 18px;
+                border-radius: 999px;
+                color: #fff;
+                font-weight: 700;
+                background: linear-gradient(135deg, #64b5f6, #4dd0e1);
+                box-shadow: 0 8px 18px rgba(77, 208, 225, 0.28);
+            }
+
+            .download-all:hover {
+                text-decoration: none;
+                filter: brightness(1.02);
+            }
+
+            .meta-row {
+                display: flex;
+                justify-content: space-between;
+                gap: 12px;
+                margin: 16px 2px 22px;
+                color: var(--muted);
+                font-size: 13px;
+            }
+
+            .summary-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 14px;
+                margin-bottom: 22px;
+            }
+
+            .summary-card {
+                padding: 16px 18px;
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                background: var(--panel);
+                box-shadow: 0 8px 20px rgba(120, 140, 160, 0.12);
+            }
+
+            .summary-card .number {
+                font-size: 24px;
+                font-weight: 800;
+                color: #2f80ed;
+            }
+
+            .summary-card .label {
+                margin-top: 6px;
+                color: var(--muted);
+                font-size: 13px;
+            }
+
+            .data-section {
+                margin-top: 18px;
+                border: 1px solid var(--border);
+                border-radius: 18px;
+                overflow: hidden;
+                background: var(--panel);
+                box-shadow: var(--shadow);
+            }
+
+            .section-title {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 16px 20px;
+                font-size: 17px;
+                font-weight: 800;
+                background: linear-gradient(90deg, #fff7f2, #f1fbff);
+                border-bottom: 1px solid var(--border);
+            }
+
+            .section-title::before {
+                content: '';
+                width: 10px;
+                height: 10px;
+                border-radius: 999px;
+                background: var(--blue);
+                box-shadow:
+                    16px 0 0 var(--pink),
+                    32px 0 0 var(--green);
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            thead th {
+                padding: 13px 16px;
+                color: #4a5568;
+                font-size: 13px;
+                text-align: left;
+                background: rgba(255, 255, 255, 0.72);
+                border-bottom: 1px solid #edf0f3;
+            }
+
+            tbody td {
+                padding: 13px 16px;
+                font-size: 14px;
+                border-bottom: 1px solid #edf0f3;
+            }
+
+            tbody tr:hover {
+                background: #f7fbff;
+            }
+
+            tbody tr:last-child td {
+                border-bottom: none;
+            }
+
+            .factor {
+                width: 110px;
+                color: #52616f;
+                font-weight: 700;
+                text-align: center;
+                background: rgba(244, 248, 252, 0.76);
+            }
+
+            .indicator-name {
+                font-weight: 700;
+                color: #2f3a45;
+            }
+
+            .indicator-desc {
+                margin-top: 4px;
+                color: var(--muted);
+                font-size: 12px;
+            }
+
+            .file-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                padding: 6px 10px;
+                border-radius: 999px;
+                background: #eef8ff;
+                border: 1px solid #d3eafd;
+                font-size: 13px;
+            }
+
+            .file-link::before {
+                content: '⬇';
+                font-size: 12px;
+            }
+
+            .footer {
+                margin-top: 18px;
+                padding: 14px 4px;
+                color: var(--muted);
+                font-size: 13px;
+                text-align: right;
+            }
+
+            @media (max-width: 760px) {
+                .page {
+                    padding: 18px;
+                }
+
+                .top-card {
+                    align-items: flex-start;
+                    flex-direction: column;
+                }
+
+                .summary-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .factor {
+                    width: 80px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="page">
+            <header class="top-card">
+                <div class="title-block">
+                    <h1>GIS 数据下载</h1>
+                    <p>Environmental and Social Risk Platform · 基础风险指标栅格数据</p>
+                </div>
+
+                <a class="download-all" href="../static/GIS数据下载/GIS数据.zip"> 打包下载 </a>
+            </header>
+
+            <div class="meta-row">
+                <div>环境社会风险平台 Environmental and Social Risk Platform</div>
+                <div>数据更新日期：2022年5月4日</div>
+            </div>
+
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="number">12</div>
+                    <div class="label">风险指标数据</div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="number">3</div>
+                    <div class="label">环境 / 人口 / 社会因素</div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="number">GeoTIFF</div>
+                    <div class="label">标准栅格数据格式</div>
+                </div>
+            </div>
+
+            <section class="data-section">
+                <div class="section-title">&nbsp&nbsp&nbsp&nbsp&nbsp风险指标数据列表</div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>因素类型</th>
+                            <th>风险指标</th>
+                            <th>下载地址</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td rowspan="4" class="factor">环境因素</td>
+                            <td>
+                                <div class="indicator-name">
+                                    <a href="https://baike.baidu.com/item/AQI" target="_blank">AQI</a>
+                                </div>
+                                <div class="indicator-desc">空气质量指数</div>
+                            </td>
+                            <td><a class="file-link" href="../static/GIS数据下载/AQI.tif">AQI.tif</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="indicator-name">
+                                    <a href="https://gisgeography.com/ndvi-normalized-difference-vegetation-index/" target="_blank">NDVI</a>
+                                </div>
+                                <div class="indicator-desc">归一化差值植被指数</div>
+                            </td>
+                            <td><a class="file-link" href="../static/GIS数据下载/NDVI.tif">NDVI.tif</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="indicator-name">
+                                    <a href="https://baike.baidu.com/item/细颗粒物" target="_blank">PM2.5</a>
+                                </div>
+                                <div class="indicator-desc">细颗粒物浓度</div>
+                            </td>
+                            <td><a class="file-link" href="../static/GIS数据下载/PM25.tif">PM25.tif</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="indicator-name">河网密度</div>
+                                <div class="indicator-desc">区域水系密度指标</div>
+                            </td>
+                            <td><a class="file-link" href="../static/GIS数据下载/河网密度.tif">河网密度.tif</a></td>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="3" class="factor">人口因素</td>
+                            <td>
+                                <div class="indicator-name">人口密度</div>
+                                <div class="indicator-desc">人口空间集聚程度</div>
+                            </td>
+                            <td><a class="file-link" href="../static/GIS数据下载/人口密度.tif">人口密度.tif</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="indicator-name">学校密度</div>
+                                <div class="indicator-desc">教育设施空间密度</div>
+                            </td>
+                            <td><a class="file-link" href="../static/GIS数据下载/学校密度.tif">学校密度.tif</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="indicator-name">居民点密度</div>
+                                <div class="indicator-desc">居住空间分布强度</div>
+                            </td>
+                            <td><a class="file-link" href="../static/GIS数据下载/居民点密度.tif">居民点密度.tif</a></td>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="5" class="factor">社会因素</td>
+                            <td>
+                                <div class="indicator-name">刑事起诉率</div>
+                                <div class="indicator-desc">社会治安风险相关指标</div>
+                            </td>
+                            <td><a class="file-link" href="../static/GIS数据下载/刑事起诉率.tif">刑事起诉率.tif</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="indicator-name">刑事批捕率</div>
+                                <div class="indicator-desc">社会治安风险相关指标</div>
+                            </td>
+                            <td><a class="file-link" href="../static/GIS数据下载/刑事批捕率.tif">刑事批捕率.tif</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="indicator-name">官员腐败指数</div>
+                                <div class="indicator-desc">社会治理风险相关指标</div>
+                            </td>
+                            <td><a class="file-link" href="../static/GIS数据下载/官员腐败指数.tif">官员腐败指数.tif</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="indicator-name">垃圾焚烧负面舆论占比</div>
+                                <div class="indicator-desc">环境社会舆情风险指标</div>
+                            </td>
+                            <td><a class="file-link" href="../static/GIS数据下载/垃圾焚烧负面舆论占比.tif">垃圾焚烧负面舆论占比.tif</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="indicator-name">环境投诉负面数量占比</div>
+                                <div class="indicator-desc">环境投诉与社会反馈指标</div>
+                            </td>
+                            <td><a class="file-link" href="../static/GIS数据下载/环境投诉负面数量占比.tif">环境投诉负面数量占比.tif</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <div class="footer">© Environmental and Social Risk Platform</div>
+        </div>
+    </body>
+</html>

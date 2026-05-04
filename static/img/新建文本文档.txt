@@ -1,0 +1,5 @@
+https://webapi.amap.com/theme/v1.3/markers/b/start.png
+https://webapi.amap.com/theme/v1.3/markers/b/end.png
+https://webapi.amap.com/theme/v1.3/markers/b/mid.png
+https://webapi.amap.com/images/close2.gif
+https://webapi.amap.com/images/sharp.png

@@ -1,0 +1,16 @@
+name: esr-platform
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.8
+  - flask
+  - numpy
+  - geopandas
+  - fiona
+  - gdal
+  - rasterio
+  - shapely
+  - pyproj
+  - requests

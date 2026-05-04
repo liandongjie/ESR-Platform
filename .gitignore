@@ -1,0 +1,107 @@
+# =========================================================
+# Python
+# =========================================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# virtual environments
+.venv/
+venv/
+env/
+
+# =========================================================
+# Environment variables
+# =========================================================
+.env
+.env.*
+!.env.example
+
+# =========================================================
+# Flask / runtime outputs
+# =========================================================
+instance/
+
+uploads/
+temp/
+tmp/
+
+logs/
+
+output/
+outputs/
+generated/
+
+reports/
+report_outputs/
+download_outputs/
+
+# =========================================================
+# Frontend (Vite / React)
+# =========================================================
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.cache/
+
+# =========================================================
+# Editors / IDE
+# =========================================================
+.vscode/
+.idea/
+
+*.swp
+*.swo
+
+# =========================================================
+# OS files
+# =========================================================
+.DS_Store
+Thumbs.db
+
+# =========================================================
+# GIS / raster / vector data
+# =========================================================
+
+# raster
+*.tif
+*.tiff
+
+# vector
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+*.sbn
+*.sbx
+*.gpkg
+# *.geojson
+
+# compressed GIS data
+*.zip
+*.rar
+*.7z
+
+# project GIS folders
+static/tif/
+
+# =========================================================
+# Keep required small assets
+# =========================================================
+!static/img/*.ico
+!static/img/*.gif
+!frontend/public/*.ico
+
+# macOS resource forks
+._*
+
+# python build
+build/
+dist/
+
+# logs
+*.log
